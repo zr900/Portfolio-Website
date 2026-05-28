@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zahraa Malik — Digital Media</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #F0F6FB;
+  --ink: #010722;
+  --muted: #3A4A6B;
+  --subtle: #8AAAC4;
+  --accent: #0384C4;
+  --accent-soft: rgba(3,132,196,0.10);
+  --card-bg: #FFFFFF;
+  --border: rgba(1,7,34,0.09);
+  --serif: 'Space Grotesk', sans-serif;
+  --sans: 'Space Mono', monospace;
+  --sidebar-w: 300px;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 400;
+  line-height: 1.75;
+  min-height: 100vh;
+}
+
+/* ── LAYOUT ── */
+.page-wrap {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) 1fr;
+  grid-template-rows: 1fr auto;
+  grid-template-areas:
+    "sidebar main"
+    "contact contact";
+  min-height: 100vh;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  grid-area: sidebar;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 3rem 2rem 3rem 2.5rem;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: var(--bg);
+}
+
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--subtle); border-radius: 2px; }
+
+.avatar-ring {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1.5rem;
+  flex-shrink: 0;
+}
+.avatar-initials {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.sidebar-name {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.4rem;
+}
+.sidebar-role {
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.75rem;
+}
+
+.sidebar-bio {
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.85;
+  margin-bottom: 2.25rem;
+  padding-bottom: 2.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.sidebar-section-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--subtle);
+  margin-bottom: 0.85rem;
+  margin-top: 0;
+}
+
+.skills-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 2.25rem;
+  padding-bottom: 2.25rem;
+  border-bottom: 1px solid var(--border);
+}
+.skill {
+  font-size: 0.73rem;
+  letter-spacing: 0.05em;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  color: var(--muted);
+  background: transparent;
+  transition: border-color 0.2s, color 0.2s;
+}
+.skill:hover { border-color: var(--accent); color: var(--ink); }
+
+.edu-item { margin-bottom: 1rem; }
+.edu-degree {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+.edu-school {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+/* ── MAIN ── */
+.main {
+  grid-area: main;
+  padding: 3rem 3rem 4rem;
+}
+
+.main-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.main-heading {
+  font-family: var(--serif);
+  font-size: 2.2rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+.main-heading em {
+  font-style: normal;
+  font-weight: 300;
+  color: var(--muted);
+}
+.project-count {
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--subtle);
+}
+
+/* ── CATEGORY ACCORDION ── */
+.category-block {
+  border-bottom: 1px solid var(--border);
+}
+.category-block:first-child { border-top: 1px solid var(--border); }
+
+.category-trigger {
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 1.4rem 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--ink);
+  font-family: var(--sans);
+  text-align: left;
+}
+.category-trigger:hover .category-name { color: var(--accent); }
+
+.category-icon {
+  width: 32px; height: 32px;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-size: 0.85rem;
+  transition: background 0.2s;
+}
+.cat-gd .category-icon  { background: #E0EEF8; color: #0384C4; }
+.cat-ux .category-icon  { background: #E0EBF8; color: #0B5CAD; }
+.cat-mp .category-icon  { background: #D6E8F5; color: #0269A0; }
+
+.category-name {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  font-weight: 400;
+  flex: 1;
+  transition: color 0.2s;
+}
+.category-meta {
+  font-size: 0.73rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--subtle);
+  margin-right: 0.5rem;
+}
+.category-chevron {
+  font-size: 0.75rem;
+  color: var(--subtle);
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+.category-block.open .category-chevron { transform: rotate(180deg); }
+.category-block.open .category-icon { opacity: 0.7; }
+
+.category-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s ease;
+}
+.category-block.open .category-body {
+  grid-template-rows: 1fr;
+}
+.category-inner {
+  overflow: hidden;
+}
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding-bottom: 1.75rem;
+}
+
+.project-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.5rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.project-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  border: 1.5px solid var(--accent);
+  opacity: 0;
+  transition: opacity 0.25s;
+  pointer-events: none;
+}
+.project-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(24,22,15,0.08);
+  border-color: transparent;
+}
+.project-card:hover::after { opacity: 1; }
+
+.card-visual {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.card-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card-body { flex: 1; display: flex; flex-direction: column; }
+
+.card-num {
+  font-family: var(--sans);
+  font-size: 0.7rem;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+}
+.card-title {
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.25;
+  margin-bottom: 0.6rem;
+}
+.card-desc {
+  font-size: 0.75rem;
+  color: var(--muted);
+  line-height: 1.8;
+  flex: 1;
+  margin-bottom: 1.25rem;
+}
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: auto;
+}
+.card-tag {
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 0.2rem 0.55rem;
+  border-radius: 2px;
+}
+
+.card-arrow {
+  position: absolute;
+  top: 1.5rem; right: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--subtle);
+  transition: color 0.2s, transform 0.2s;
+}
+.project-card:hover .card-arrow { color: var(--accent); transform: translate(2px,-2px); }
+
+/* ── CONTACT FOOTER ── */
+.contact-footer {
+  grid-area: contact;
+  border-top: 1px solid var(--border);
+  background: var(--ink);
+  padding: 3.5rem 2.5rem 3.5rem calc(var(--sidebar-w) + 2.5rem);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 3rem;
+  align-items: center;
+}
+
+.contact-left {}
+.contact-heading {
+  font-family: var(--serif);
+  font-size: 1.9rem;
+  font-weight: 400;
+  color: #F5F2ED;
+  line-height: 1.15;
+  margin-bottom: 0.6rem;
+}
+.contact-heading em { font-style: normal; font-weight: 300; color: var(--accent); }
+.contact-sub {
+  font-size: 0.83rem;
+  color: rgba(245,242,237,0.45);
+  line-height: 1.75;
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-end;
+}
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.82rem;
+  color: rgba(245,242,237,0.6);
+  text-decoration: none;
+  transition: color 0.2s;
+  letter-spacing: 0.03em;
+}
+.contact-link:hover { color: var(--accent); }
+.contact-link-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(245,242,237,0.25);
+  min-width: 54px;
+  text-align: right;
+}
+.contact-divider {
+  width: 1px;
+  height: 12px;
+  background: rgba(245,242,237,0.15);
+}
+
+.footer-bottom {
+  grid-column: 1 / -1;
+  border-top: 1px solid rgba(245,242,237,0.08);
+  padding-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-copy {
+  font-size: 0.73rem;
+  color: rgba(245,242,237,0.2);
+  letter-spacing: 0.05em;
+}
+
+/* ── MODAL ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(24,22,15,0.55);
+  backdrop-filter: blur(4px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+.modal {
+  background: var(--card-bg);
+  border-radius: 10px;
+  width: min(900px, 92vw);
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 2.5rem;
+  position: relative;
+  transform: translateY(16px);
+  transition: transform 0.25s;
+}
+.modal-overlay.open .modal { transform: translateY(0); }
+.modal-close {
+  position: absolute;
+  top: 1.25rem; right: 1.25rem;
+  background: none; border: none;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 1.25rem;
+  line-height: 1;
+  padding: 0.25rem;
+  transition: color 0.2s;
+}
+.modal-close:hover { color: var(--ink); }
+.modal-tag {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+.modal-title {
+  font-family: var(--serif);
+  font-size: 1.75rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+.modal-body {
+  font-size: 0.87rem;
+  color: var(--muted);
+  line-height: 1.85;
+  margin-bottom: 1.5rem;
+}
+.modal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.modal-gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.modal-gallery img {
+  width: 100%;
+  max-height: 320px;   /* 👈 key fix */
+  object-fit: cover;   /* keeps it cropped nicely */
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+/* ── ANIMATIONS ── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: fadeUp 0.6s ease forwards;
+}
+.fade-in:nth-child(1) { animation-delay: 0.05s; }
+.fade-in:nth-child(2) { animation-delay: 0.12s; }
+.fade-in:nth-child(3) { animation-delay: 0.19s; }
+.fade-in:nth-child(4) { animation-delay: 0.26s; }
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: none; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 860px) {
+  .page-wrap {
+    grid-template-columns: 1fr;
+    grid-template-areas: "sidebar" "main" "contact";
+  }
+  .sidebar {
+    position: static;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 1.5rem;
+  }
+  .main { padding: 2rem 1.5rem 3rem; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .contact-footer {
+    padding: 2.5rem 1.5rem;
+    grid-template-columns: 1fr;
+  }
+  .contact-links { align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+    <div class="avatar-ring">
+      <span class="avatar-initials">ZM</span>
+    </div>
+
+    <h1 class="sidebar-name">Zahraa Malik</h1>
+    <p class="sidebar-role">Digital Media Graduate</p>
+
+    <p class="sidebar-bio">
+Versatile Digital Media student with UX/UI design foundations. My personal strengths include empathy, collaboration and project management. I’m passionate about trying new things and 
+developing skills through creating meaningful projects. I’m eager to further develop my skills and knowledge in user-centered design.    </p>
+
+    <p class="sidebar-section-label">Skills</p>
+    <div class="skills-wrap">
+      <span class="skill">Figma</span>
+      <span class="skill">Premiere Pro</span>
+      <span class="skill">After Effects</span>
+      <span class="skill">Illustrator</span>
+      <span class="skill">Lightroom</span>
+      <span class="skill">Photoshop</span>
+      <span class="skill">InDesign</span>
+      <span class="skill">WordPress</span>
+      <span class="skill">Copywriting</span>
+    </div>
+
+    <p class="sidebar-section-label">Education</p>
+    <div class="edu-item">
+      <p class="edu-degree">BA Digital Media</p>
+      <p class="edu-school">University of [Your Uni] · 2025</p>
+    </div>
+  </aside>
+
+  <!-- ── MAIN ── -->
+  <main class="main">
+    <header class="main-header">
+      <h2 class="main-heading">Work</h2>
+    </header>
+
+    <!-- ── UX ── -->
+    <div class="category-block cat-ux" id="cat-ux">
+      <button class="category-trigger" onclick="toggleCat('cat-ux')" aria-expanded="false">
+        <span class="category-icon">◈</span>
+        <span class="category-name">UX Design</span>
+        <span class="category-chevron">▾</span>
+      </button>
+      <div class="category-body">
+        <div class="category-inner">
+          <div class="projects-grid">
+
+            <a class="project-card" href="#" onclick="openModal('MoveTogether: A UX/UI Process', 'UX Design · UI Design', 'Specifically catered to students, MoveTogether is a mobile app designed to encourage mindful and social physical activity through features such as community challenges, accountability groups, and mental health resources. The goal was to find a user-centred solution to help students overcome barriers to engaging in positive body movement. For this project, I explored the Double Diamond process from start to finish. 1. Conducted user research on the topic - primary (interviews and observations) and secondary (academic journals). 2. Collected data from the user group and organised it into a data matrix, and used thematic analysis to identify barriers and user needs.3. Collaborated with two peers to combine the data of our user groups. I drafted a persona, user journey map, and empathy map.4. Produced a final individual pitch deck and a working Figma prototype of a mobile app. ', ['User Research', 'Qualitative Data Analysis', 'Wireframing', 'Figma Prototyping'], ['media/movetogether-figma.png']); return false;">
+              <div class="card-visual" style="background:#E0EEF8;">
+                <img src="media/movetogether-figma.png" alt="">
+                </svg>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title">MoveTogether: A UX/UI Process</h3>
+                <p class="card-desc">A mobile app concept to encourage students to be more physically active — from user research to Figma prototype.</p>
+                <div class="card-tags"><span class="card-tag">User Experience Design</span><span class="card-tag">User Interface Design</span></div>
+              </div>
+              <span class="card-arrow">↗</span>
+            </a>
+
+            <a class="project-card" href="#" onclick="openModal('Immersion in Games: An Experimental Study', 'Research Design · Data Collection · Data Analysis', 'Conducted a study to investigate the influence of a video game\'s sound design on player immersion and emotional response, focusing on the differential effects of original sound vs. muted sound. 4 Participants engaged in two 20-minute gameplay sessions under alternating sound conditions (original sound vs. no sound), with a 24-hour interval to reduce carryover effects such as fatigue. Data was collected through questionnaires created in Qualtrics, measuring emotion and immersion. Immersion was assessed through time perception distortion and self-reported indicators such as avatar identification. Emotion was assessed through valence-arousal ratings and self-reported affective indicators such as enjoyment and tension. Statistical testing was conducted using JASP, and the findings were discussed in a research report. ', ['Qualtrics', 'JASP', 'Data Interpretation', 'Critical Evaluation', 'Research Presentation']); return false;">
+              <div class="card-visual" style="background:#D6E8F5;">
+                <svg viewBox="0 0 260 110" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="45" y="20" width="170" height="70" rx="4" fill="none" stroke="#0B5CAD" stroke-width="1.1" opacity="0.4"/>
+                  <rect x="45" y="20" width="170" height="18" rx="4" fill="#0B5CAD" opacity="0.08"/>
+                  <rect x="55" y="48" width="70" height="30" rx="2" fill="#0B5CAD" opacity="0.05"/>
+                  <rect x="135" y="48" width="70" height="30" rx="2" fill="#0B5CAD" opacity="0.05"/>
+                  <line x1="55" y1="54" x2="110" y2="54" stroke="#0B5CAD" stroke-width="0.8" opacity="0.25"/>
+                  <line x1="55" y1="61" x2="95" y2="61" stroke="#0B5CAD" stroke-width="0.8" opacity="0.25"/>
+                </svg>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title">Immersion in Games: An Experimental Study</h3>
+                <p class="card-desc">A study involving multiple participants, collection of qualitative and quantitative data, and statistical testing. </p>
+                <div class="card-tags"><span class="card-tag">Research Design</span><span class="card-tag">Data Collection</span><span class="card-tag">Data Analysis</span></div>
+              </div>
+              <span class="card-arrow">↗</span>
+            </a>
+
+            <a class="project-card" href="#" onclick="openModal('NatureBuddy: A UX/UI Process', 'UX Design· UI Design', 'This project investigates how a mobile application can be designed to encourage connection to natureamong young people aged 18-25, in a time of increasing disconnection between people and the natural world. It draws on existing literature into nature connectedness, its benefits, and barriers to connecting with nature. A mixed methods study was conducted with 9 participants aged 19-22, exploring their views, their level of connection to nature, and the barriers they faced. Key findings revealed that participants had a low to moderate overall nature connection, and the most significant barriers to nature connection were time, motivation, weather, and a lack of awareness of nearby green spaces. Participants also expressed a preference for social-oriented nature engagement. These insights informed a user-centred design process, and the outcome was a high-fidelity prototype for a mobile app, NatureBuddy. The app features a nature spot discovery map, a social feed, community features and a goal-tracker. Heuristic evaluation identified areas for improvement such as visual consistency, error state design, and the lack of onboarding. The project supports the idea that a digital tool shows promise as a way to promote nature connectedness.', ['Mixed-Methods Research', 'Literature Review', 'User-Centred Design', 'Information Architecture', 'Figma Prototyping', 'Heuristic Evaluation'], ['media/naturebuddy-figma.png']); return false;">
+              <div class="card-visual" style="background:#E0EEF8;">
+                <img src="media\naturebuddy-figma.png" alt="">
+                </svg>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title">NatureBuddy: A UX/UI Process</h3>
+                <p class="card-desc">A mobile app concept to encourage young people to connect with nature - from user research to Figma prototype. </p>
+                <div class="card-tags"><span class="card-tag">User Experience Design</span><span class="card-tag">User Interface Design</span></div>
+              </div>
+              <span class="card-arrow">↗</span>
+            </a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+        <!-- ── GRAPHIC DESIGN ── -->
+    <div class="category-block cat-gd open" id="cat-gd">
+      <button class="category-trigger" onclick="toggleCat('cat-gd')" aria-expanded="true">
+        <span class="category-icon">✦</span>
+        <span class="category-name">Graphic and Web Design</span>
+        <span class="category-chevron">▾</span>
+      </button>
+      <div class="category-body">
+        <div class="category-inner">
+          <div class="projects-grid">
+
+            <a class="project-card" href="#" onclick="openModal('Design and Typographic Fundamentals', 'Graphic Design · Typography · Web Design', 'Developed a responsive HTML coded website showcasing graphic design work, published and hosted using GitHub. This showcases a poster advertising a girls’ skate clinic, and 8 compositions for an art exhibit, experimenting with the 8 typographic layout systems.', ['Photoshop', 'Illustrator', 'InDesign', 'Typography', 'CARP Principles', 'Poster Design', 'HTML', 'CSS', 'GitHub Pages'], ['media/skate-clinic-poster.png', 'media/typeposter1.png', 'media/typeposter2.png', 'media/typeposter3.png']); return false;">
+              <div class="card-visual" style="background:#E0EEF8;">
+                <img src="media/design-website.png" alt="Design and Typographic Fundamentals webpage preview">
+              </div>
+              <div class="card-body">
+                <h3 class="card-title">Design and Typographic Fundamentals</h3>
+                <p class="card-desc">Responsive website and series of posters, focusing on design principles.</p>
+                <div class="card-tags"><span class="card-tag">Graphic Design</span><span class="card-tag">Typography</span><span class="card-tag">Web Design</span></div>
+              </div>
+              <span class="card-arrow">↗</span>
+            </a>
+
+            <a class="project-card" href="#" onclick="openModal('Rescued Roots: Pay As You Feel Restaurant', 'Web Design · Brand Identity · Graphic Design', 'A mobile-first Bootstrap website for a fictional non-profit restaurant focusing on sustainability and food waste, implementing features such as a reservation form for food boxes and hero slideshow. Developed a brand identity system including a logomark, logotype, and colour scheme, applied consistently through promotional materials. Designed accompanying assets including a billboard ad, poster and menu displayed in mockup style in a cohesive InDesign lookbook. Documentation also included strategy and scope statements, moodboard and wireframe aligned with the design brief. ', ['Bootstrap', 'Visual Identity Systems', 'Logo Design', 'Poster Design', 'Menu Design', 'Photoshop', 'Illustrator', 'InDesign'], ['media/restaurantlogomark.png', 'media/restaurantlogotype.png', 'media/restaurantposter.png']); return false;">
+              <div class="card-visual" style="background:#D6E4F5;">
+                <img src="media\restaurantlogomark.png" alt="">
+              </div>
+              <div class="card-body">
+                <h3 class="card-title">Rescued Roots: Pay As You Feel Restaurant</h3>
+                <p class="card-desc">Identity system and website for a fictional restaurant.</p>
+                <div class="card-tags"><span class="card-tag">Web Design</span><span class="card-tag">Brand Identity</span><span class="card-tag">Graphic Design</span></div>
+              </div>
+              <span class="card-arrow">↗</span>
+            </a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ── CONTACT FOOTER ── -->
+  <footer class="contact-footer">
+    <div class="contact-left">
+      <h2 class="contact-heading">Let's make something<br><em>together</em></h2>
+      <p class="contact-sub">Open to full-time roles.</p>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:zahraamalik101234@gmail.com" class="contact-link">
+        <span class="contact-link-label">Email</span>
+        <span class="contact-divider"></span>
+        zahraamalik101234@gmail.com
+      </a>
+      <a href="https://linkedin.com/in/zahraa1malik" target="_blank" class="contact-link">
+        <span class="contact-link-label">LinkedIn</span>
+        <span class="contact-divider"></span>
+        zahraa1malik
+      </a>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Zahraa Malik</span>
+      <span class="footer-copy">Digital Media · Bristol</span>
+    </div>
+  </footer>
+
+</div><!-- end .page-wrap -->
+
+<!-- ── MODAL ── -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOnOverlay(event)">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
+    <p class="modal-tag" id="modalTag"></p>
+    <h2 class="modal-title" id="modalTitle"></h2>
+    <p class="modal-body" id="modalBody"></p>
+    <div class="modal-gallery" id="modalGallery"></div>
+    <div class="modal-tags" id="modalTags"></div>
+  </div>
+</div>
+
+<script>
+function toggleCat(id) {
+  const block = document.getElementById(id);
+  const isOpen = block.classList.contains('open');
+  block.classList.toggle('open', !isOpen);
+  block.querySelector('.category-trigger').setAttribute('aria-expanded', String(!isOpen));
+}
+
+function openModal(title, tag, body, tags, images = []) {
+
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalTag').textContent = tag;
+  document.getElementById('modalBody').textContent = body;
+
+  // Tags
+  const tagsEl = document.getElementById('modalTags');
+  tagsEl.innerHTML = tags
+    .map(t => `<span class="card-tag">${t}</span>`)
+    .join('');
+
+  // Images
+  const galleryEl = document.getElementById('modalGallery');
+
+  galleryEl.innerHTML = images
+    .map(img => `
+      <img src="${img}" alt="${title} project image">
+    `)
+    .join('');
+
+  // Open modal
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeModalOnOverlay(e) {
+  if (e.target === e.currentTarget) closeModal();
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
