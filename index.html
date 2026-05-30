@@ -492,11 +492,14 @@ body {
 }
 
 .modal-gallery img {
-  width: 100%;
-  max-height: 320px;   /* 👈 key fix */
-  object-fit: cover;   /* keeps it cropped nicely */
+  width: auto;          /* 👈 change from 100% to auto */
+  max-width: 100%;      /* 👈 add this so they don't overflow */
+  max-height: 320px;
+  object-fit: contain;  /* 👈 change from cover to contain */
   border-radius: 8px;
   border: 1px solid var(--border);
+  display: block;
+  margin: 0 auto;       /* 👈 centres narrower images */
 }
 
 /* ── ANIMATIONS ── */
@@ -687,7 +690,7 @@ developing skills through creating meaningful projects. I’m eager to further d
   <footer class="contact-footer">
     <div class="contact-left">
       <h2 class="contact-heading">Let's make something<br><em>together</em></h2>
-      <p class="contact-sub">Open to full-time roles.</p>
+      <p class="contact-sub">Open to full-time roles!</p>
     </div>
     <div class="contact-links">
       <a href="mailto:zahraamalik101234@gmail.com" class="contact-link">
