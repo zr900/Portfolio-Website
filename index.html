@@ -501,6 +501,25 @@ body {
   display: block;
   margin: 0 auto;       /* 👈 centres narrower images */
 }
+.modal-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1.25rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  border: 1px solid var(--accent);
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  transition: background 0.2s, color 0.2s;
+}
+.modal-link:hover {
+  background: var(--accent);
+  color: #fff;
+}
 
 /* ── ANIMATIONS ── */
 .fade-in {
@@ -684,6 +703,48 @@ developing skills through creating meaningful projects. I’m eager to further d
       </div>
     </div>
 
+            <!-- ── MEDIA PRODUCTION ── -->
+    <div class="category-block cat-gd open" id="cat-gd">
+      <button class="category-trigger" onclick="toggleCat('cat-gd')" aria-expanded="true">
+        <span class="category-icon">✦</span>
+        <span class="category-name">Media Production</span>
+        <span class="category-chevron">▾</span>
+      </button>
+      <div class="category-body">
+        <div class="category-inner">
+          <div class="projects-grid">
+
+            <a class="project-card" href="#" onclick="openModal('Microplastics: A Motion Graphics Video', 'Motion Graphics', 'Created a video explaining the effects of microplastics on marine life.', ['After Effects', 'Illustrator', 'Storyboarding', 'Scripting', 'Visual Communication'], ['media/microplastics.png'], [
+    { label: 'View Video', url: 'https://figma.com/your-link' },
+  ]); return false;">
+              <div class="card-visual" style="background:#E0EEF8;">
+                <img src="media/microplastics.png" alt="">
+              </div>
+              <div class="card-body">
+                <h3 class="card-title">Microplastics: A Motion Graphics Video</h3>
+                <p class="card-desc">Motion Graphic video on the effects of microplastics on marine life.</p>
+                <div class="card-tags"><span class="card-tag">Motion Graphics</span></div>
+              </div>
+              <span class="card-arrow">↗</span>
+            </a>
+
+                        <a class="project-card" href="#" onclick="openModal('Microplastics: A Motion Graphics Video', 'Motion Graphics', 'Created a video explaining the effects of microplastics on marine life.', ['After Effects', 'Illustrator', 'Storyboarding', 'Scripting', 'Visual Communication'], ['media/microplastics.png']); return false;">
+              <div class="card-visual" style="background:#E0EEF8;">
+                <img src="media/microplastics.png" alt="">
+              </div>
+              <div class="card-body">
+                <h3 class="card-title">Microplastics: A Motion Graphics Video</h3>
+                <p class="card-desc">Motion Graphic video on the effects of microplastics on marine life.</p>
+                <div class="card-tags"><span class="card-tag">Motion Graphics</span></div>
+              </div>
+              <span class="card-arrow">↗</span>
+            </a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
   </main>
 
   <!-- ── CONTACT FOOTER ── -->
@@ -719,6 +780,7 @@ developing skills through creating meaningful projects. I’m eager to further d
     <p class="modal-tag" id="modalTag"></p>
     <h2 class="modal-title" id="modalTitle"></h2>
     <p class="modal-body" id="modalBody"></p>
+    <div id="modalLinks" style="display:flex; flex-wrap:wrap; gap:0.5rem;"></div>
     <div class="modal-gallery" id="modalGallery"></div>
     <div class="modal-tags" id="modalTags"></div>
   </div>
